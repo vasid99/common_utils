@@ -1,0 +1,3 @@
+# Git-specific ignores
+.gitignore
+gitignore

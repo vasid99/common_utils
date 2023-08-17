@@ -1,0 +1,5 @@
+#!/usr/bin/bash
+git init
+git commit --allow-empty -m "Root commit"
+echo
+cp -rfvT "$0".d .
