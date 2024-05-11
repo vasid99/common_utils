@@ -1,0 +1,17 @@
+#!/usr/bin/bash
+
+venv=$1
+if [ -z "$venv" ];then
+	echo "Venv name not provided, exiting"
+else
+	ACTIVATE=$PYVENVS_PATH/$venv/bin/activate
+	if [ ! -f "$ACTIVATE" ];then
+		echo "Venv $venv not found. Available venvs:"
+		for ve in $(ls $PYVENVS_PATH);do
+			echo "- $ve"
+		done
+	else
+		echo "Activating venv $venv"
+		source $ACTIVATE
+	fi
+fi
