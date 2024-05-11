@@ -15,14 +15,13 @@ logme "repo directory is: ${repodir}"
 shellname=$(basename $SHELL)
 logme "shell is: ${shellname}"
 
-mkdir -p ~/.local/bin/common ~/.local/bin/bash
-
 targetdir=~/.local/bin/shell
 logme "target directory is: $targetdir"
 mkdir -p $targetdir
 
 pathappend=
 for srcdir in common $shellname;do
+	logme "Copying $srcdir scripts to $targetdir"
 	cp -rf $repodir/$srcdir $targetdir
 	pathappend="$targetdir/$(basename $srcdir):$pathappend"
 done
@@ -32,5 +31,7 @@ echo -n "Add path append to ${shellname}rc? [y/n] "
 read inp
 if [ "$inp" = "y" ];then
 	cmd="PATH=${pathappend}"\$"PATH"
-	echo $cmd >> ~/.${shellname}rc
+	rcfile=~/.${shellname}rc
+	logme "Appending command to $rcfile: "\""$cmd"\"
+	echo $cmd >> $rcfile
 fi
